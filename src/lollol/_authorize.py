@@ -29,7 +29,7 @@ class _PermissionLocal:
 
 
 @functools.singledispatch
-def set_secret(secret, *args):
+def set_secret(secret, *args) -> Secret:
     raise TypeError("Unsupported object type %s" % secret)
 
 
@@ -38,7 +38,7 @@ def _(secret: str, *args):
     return Secret(secret)
 
 
-@set_secret.register
+@set_secret.register                                              # type: ignore
 def _(secret: types.FunctionType, *args):
     return Secret(secret(*args))
 
@@ -52,7 +52,7 @@ class PermissionManager:
         self._manager = manager
         self._pem_key = perm_key
         try:
-            self._app_name = manager.app_name
+            self._app_name = manager.app_name                      # type:ignore
         except AttributeError:
             raise AttributeError("set app_name attribute")
 
@@ -119,10 +119,10 @@ class PermissionManager:
         :return:
             None
         """
-        secret = set_secret(secret, *args)
-        self._manager.secret = secret
+        secret_obj = set_secret(secret, *args)
+        self._manager.secret = secret_obj
 
-    def get_secret_key(self) -> str:
+    def get_secret_key(self) -> Secret:
         """
         Method to get secret key for decoding json web token.
         :return:
