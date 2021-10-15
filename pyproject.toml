@@ -1,0 +1,48 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "permation"
+authors = [
+    {name = "sunny", email = "uram24@42maru.com"},
+]
+version = "0.0.1"
+description = "Authorization check package."
+classifiers = [
+    "Topic :: Internet",
+    "Topic :: Security",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9"
+]
+dependencies = [
+    "fastapi-login >= 1.7.2",
+    "pydantic >= 1.6.2",
+]
+#readme= "README.rst"
+requires-python = ">=3.6.1"
+
+[project.optional-dependencies]
+test = [
+    "pytest >=6.2.4,<7.0.0",
+    "mypy ==0.910",
+    "flake8 >=3.8.3,<4.0.0"
+]
+
+[tool.mypy]
+cache_dir = ".mypy_cache"
+warn_unused_configs = true
+warn_redundant_casts = true
+show_error_codes = true
+show_column_numbers = true
+check_untyped_defs = true
+follow_imports = "silent"
+ignore_missing_imports = true
+exclude = "src/lollol/__init__.py"
+files = [
+    "src/lollol/_authorize.py",
+    "src/lollol/_utils.py"
+]
