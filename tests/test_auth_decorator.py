@@ -4,10 +4,9 @@ import typing as t
 from pydantic import BaseModel
 from fastapi import FastAPI, Request, status
 from fastapi.testclient import TestClient
-from fastapi_login import LoginManager
 from fastapi.security import SecurityScopes
 
-from src.lollol import authorize_required, PermissionManager
+from src.lollol import authorize_required, PermissionManager, LoginManager
 from src.lollol._exceptions import ScopeNotSpecified
 
 
@@ -106,7 +105,7 @@ def test_get_method():
     assert response.status_code == 200, response.text
 
 
-def test_scope_not_specifiied():
+def test_scope_not_specified():
     with pytest.raises(ScopeNotSpecified):
         @app.get("/lollol")
         @authorize_required

@@ -1,6 +1,5 @@
 import asyncio
-from src.lollol import PermissionManager
-from fastapi_login import LoginManager
+from src.lollol import PermissionManager, LoginManager
 
 from fastapi.security import SecurityScopes
 
@@ -35,6 +34,3 @@ async def test_check_permission():
     pm = PermissionManager(manager)
     token = await pm.get_token(request)
     assert pm.has_permission(token, SecurityScopes(required_scopes)) == True
-
-
-

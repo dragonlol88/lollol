@@ -1,7 +1,6 @@
 import pytest
-from src.lollol import PermissionManager
+from src.lollol import PermissionManager, LoginManager
 from src.lollol import lookup_permission_obj
-from fastapi_login import LoginManager
 
 
 secret_key = "hello secret"

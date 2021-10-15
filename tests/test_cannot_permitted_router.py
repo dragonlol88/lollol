@@ -1,15 +1,12 @@
-import pytest
 import typing as t
 
 from pydantic import BaseModel
-from fastapi import FastAPI, Request, status, APIRouter, HTTPException
+from fastapi import FastAPI, status, APIRouter
 from fastapi.testclient import TestClient
-from fastapi_login import LoginManager
 from fastapi.security import SecurityScopes
 
 
-from src.lollol import authorize_required, PermissionManager, authorize_router
-from src.lollol._exceptions import ScopeNotSpecified
+from src.lollol import PermissionManager, authorize_router, LoginManager
 
 
 required_scopes = ["user:read"]
@@ -46,3 +43,5 @@ def test_router_with_permission_denied():
                           json={"items": {"foo": 1, "bar": 2}},
                           headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == status.HTTP_401_UNAUTHORIZED, response.text
+
+
