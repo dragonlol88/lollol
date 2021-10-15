@@ -158,6 +158,8 @@ class PermissionManager:
             payload = self._manager._get_payload(token)
         except type(self._manager.not_authenticated_exception):
             try:
+                if extra_secret_key is None:
+                    return False
                 payload = self._manager._get_payload_with_extrakey(token, extra_secret_key)
             except type(self._manager.not_authenticated_exception):
                 # We got an error while decoding the token
