@@ -26,6 +26,7 @@ _REQUEST_VAR_NAME   = "request"
 _X_REQUEST_VAR_NAME = "x_request"
 
 _SCOPE_VAR_NAME = "scopes"
+_EXTRA_SECRET_KEY = "x-extra-secret-key"
 
 POSITIONAL_OR_KEYWORD = inspect._POSITIONAL_OR_KEYWORD            # type: ignore
 POSITIONAL_ONLY= inspect._POSITIONAL_ONLY                         # type: ignore
@@ -137,7 +138,9 @@ def _get_code_from_function(
             )
 
 
-def _authorize_required(endpoint, scopes: t.Optional[SecurityScopes]=None) -> t.Callable:
+def _authorize_required(
+        endpoint, scopes: t.Optional[SecurityScopes] = None
+) -> t.Callable:
 
     parameters = []
     is_duck_function = False
@@ -246,7 +249,8 @@ def _authorize_required(endpoint, scopes: t.Optional[SecurityScopes]=None) -> t.
 
     @functools.wraps(endpoint)
     async def decorator(*args, **kwargs):
-        request_obj = kwargs.pop(request_var_name, None)
+        request_obj: Request = kwargs.pop(request_var_name, None)
+        extra_secret_key = None
 
         if not scopes and _find_name(org_argnames, request_var_name):
             kwargs[request_var_name] = request_obj
@@ -256,9 +260,15 @@ def _authorize_required(endpoint, scopes: t.Optional[SecurityScopes]=None) -> t.
 
         manager: PermissionManager = lookup_permission_obj()
         access_token = await manager.get_token(request_obj)
+        headers = request_obj.headers
+
+        # extra secret key
+        if _EXTRA_SECRET_KEY in headers:
+            extra_secret_key = headers.get(_EXTRA_SECRET_KEY)
         have_permission = manager.has_permission(
                                 token=access_token,
-                                required_scopes=required_scope
+                                required_scopes=required_scope,
+                                extra_secret_key=extra_secret_key
                             )
         if not have_permission:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
