@@ -6,8 +6,10 @@ from fastapi import FastAPI, Request, status
 from fastapi.testclient import TestClient
 from fastapi.security import SecurityScopes
 
-from src.lollol import authorize_required, PermissionManager, LoginManager
-from src.lollol._exceptions import ScopeNotSpecified
+from . import authorize_required
+from . import PermissionManager
+from . import LoginManager
+from . import ScopeNotSpecified
 
 
 required_scopes = ["user:read"]

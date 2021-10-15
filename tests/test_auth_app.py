@@ -5,7 +5,10 @@ from fastapi import FastAPI, Request
 from fastapi.testclient import TestClient
 from fastapi.security import SecurityScopes
 
-from src.lollol import PermissionManager, authorize_app, LoginManager
+from . import PermissionManager
+from . import authorize_app
+from . import LoginManager
+
 
 required_scopes = ["user:read"]
 cannot_be_permitted_scopes = ["user:write"]

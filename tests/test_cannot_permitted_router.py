@@ -5,9 +5,9 @@ from fastapi import FastAPI, status, APIRouter
 from fastapi.testclient import TestClient
 from fastapi.security import SecurityScopes
 
-
-from src.lollol import PermissionManager, authorize_router, LoginManager
-
+from . import PermissionManager
+from . import authorize_router
+from . import LoginManager
 
 required_scopes = ["user:read"]
 cannot_be_permitted_scopes = ["user:write"]

@@ -4,9 +4,10 @@ from pydantic import BaseModel
 from fastapi import FastAPI, status
 from fastapi.testclient import TestClient
 from fastapi.security import SecurityScopes
-from src.lollol import authorize_required
-from src.lollol import PermissionManager, LoginManager
 
+from . import authorize_required
+from . import PermissionManager
+from . import LoginManager
 
 required_scopes = ["user:read"]
 cannot_be_permitted_scopes = ["user:write"]

@@ -1,9 +1,9 @@
 import asyncio
-from src.lollol import PermissionManager, LoginManager
 
 from fastapi.security import SecurityScopes
 
-
+from . import PermissionManager
+from . import LoginManager
 
 
 required_scopes = ["user:read"]

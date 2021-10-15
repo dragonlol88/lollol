@@ -1,6 +1,8 @@
 import pytest
-from src.lollol import PermissionManager, LoginManager
-from src.lollol import lookup_permission_obj
+
+from . import PermissionManager
+from . import LoginManager
+from . import lookup_permission_obj
 
 
 secret_key = "hello secret"
