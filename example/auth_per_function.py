@@ -11,12 +11,10 @@ If you
 secret_key = "test_secret"
 token_url  = '/auth'
 
-# Login manager initialize
-manager = lollol.LoginManager(secret_key, token_url, use_header=True)
-manager.app_name = "example_app"
-
 # Permission manager initialize
-perm = lollol.PermissionManager(manager)
+lollol.PermissionManager(
+        lollol.LoginManager(secret_key, token_url, use_header=True)
+)
 
 app = FastAPI()
 
