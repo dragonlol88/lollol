@@ -105,7 +105,7 @@ class PermissionManager:
         try:
             self._app_name = manager.app_name                      # type:ignore
         except AttributeError:
-            raise AttributeError("set app_name attribute")
+            pass
 
         self._register()
 
