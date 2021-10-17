@@ -4,9 +4,6 @@ from pydantic import BaseModel
 from fastapi import FastAPI
 from fastapi.security import SecurityScopes
 
-"""
-If you 
-"""
 # secret key to decipher and encipher the token
 secret_key = "test_secret"
 token_url  = '/auth'
