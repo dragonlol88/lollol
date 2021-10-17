@@ -37,8 +37,3 @@ def test_secret_key_from_str():
 
     assert str(pm.get_secret_key()) == "hello secret"
 
-
-def test_after_releasing_app_name():
-    _release_app_name()
-    with pytest.raises(AttributeError):
-        PermissionManager(manager)
