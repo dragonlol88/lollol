@@ -29,7 +29,7 @@ _SCOPE_VAR_NAME = "scopes"
 _EXTRA_SECRET_KEY = "x-extra-secret-key"
 
 POSITIONAL_OR_KEYWORD = inspect._POSITIONAL_OR_KEYWORD            # type: ignore
-POSITIONAL_ONLY= inspect._POSITIONAL_ONLY                         # type: ignore
+POSITIONAL_ONLY = inspect._POSITIONAL_ONLY                         # type: ignore
 
 
 def _get_parameter_if_have(
@@ -38,6 +38,7 @@ def _get_parameter_if_have(
         compare_func: t.Callable,
         params: t.List[inspect.Parameter]
     ) -> t.Union[inspect.Parameter, None]:
+
     """
     Funtion to get parameter object if params have target object.
 
@@ -55,7 +56,7 @@ def _get_parameter_if_have(
 
     size = len(params)
     idx = 0
-    while size-idx:
+    while size - idx:
         param = params[idx]
         if compare_func(
                 getattr(param, source), target
@@ -243,7 +244,6 @@ def _authorize_required(
         endpoint.__globals__
     )
     _code = endpoint.__code__
-    _mod_code = modified.__code__
     org_argnames = _code.co_varnames
     endpoint.__code__ = modified.__code__
 
@@ -290,7 +290,7 @@ def _get_router(obj):
         router = getattr(obj, "router", None)
         if router is None:
             raise AttributeError(
-                "Does not exist router attribute in %s" %str(type(obj))
+                "Does not exist router attribute in %s" % str(type(obj))
             )
         return router
 
@@ -367,6 +367,3 @@ def authorize_router(router: APIRouter, scopes: SecurityScopes) -> APIRouter:
 def authorize_app(app: FastAPI, scopes: SecurityScopes) -> FastAPI:
     authorize_router(_get_router(app), scopes)
     return app
-
-
-

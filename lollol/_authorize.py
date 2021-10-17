@@ -200,8 +200,9 @@ def lookup_permission_obj():
     obj = _pemission_local.get()
 
     if obj is None:
-        raise KeyError("permission object does not exist. \
-                            first initialize PermissionManager."
+        raise KeyError(
+            "permission object does not exist. \
+            first initialize PermissionManager."
             )
     return obj
 
