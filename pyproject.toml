@@ -3,12 +3,10 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [project]
-name = "permation"
+name = "lollol"
 authors = [
     {name = "sunny", email = "uram24@42maru.com"},
 ]
-version = "0.0.1"
-description = "Authorization check package."
 classifiers = [
     "Topic :: Internet",
     "Topic :: Security",
@@ -22,8 +20,13 @@ dependencies = [
     "fastapi-login >= 1.7.2",
     "pydantic >= 1.6.2",
 ]
-#readme= "README.rst"
+readme= "README.rst"
 requires-python = ">=3.6.1"
+dynamic = ['version', 'description']
+
+
+[tool.flit.sdist]
+include = ["lollol/*"]
 
 [project.optional-dependencies]
 test = [
@@ -41,8 +44,8 @@ show_column_numbers = true
 check_untyped_defs = true
 follow_imports = "silent"
 ignore_missing_imports = true
-exclude = "src/lollol/__init__.py"
+exclude = "lollol/__init__.py"
 files = [
-    "src/lollol/_authorize.py",
-    "src/lollol/_utils.py"
+    "lollol/_authorize.py",
+    "lollol/_utils.py"
 ]
