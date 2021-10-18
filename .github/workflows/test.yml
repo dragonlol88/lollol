@@ -36,4 +36,4 @@ jobs:
         if: ${{ matrix.python-version != '3.6' }}
         run: bash scripts/lint.sh
       - name: Test
-        run: bash scripts/test.sh
+        run: bash scripts/tests.sh
